@@ -16,11 +16,13 @@ export default function Centrinova({ centrinova }) {
     const { auth } = usePage().props;
  
     const [editing, setEditing] = useState(false);
+    const [previewImage, setPreviewImage] = useState(null);
     
  
     const { data, setData, patch, clearErrors, reset, errors } = useForm({
         message: centrinova.message,
         description: centrinova.description,
+        image: centrinova.image,
     });
  
     const submit = (e) => {
@@ -30,7 +32,17 @@ export default function Centrinova({ centrinova }) {
 
    
     
-
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setData('image', file);
+    
+        // Preview image
+        if (file) {
+            setPreviewImage(URL.createObjectURL(file));
+        } else {
+            setPreviewImage(null);
+        }
+    };
     // console.log(route('centrinova.show', centrinova.id));
 
     return (
@@ -82,6 +94,14 @@ export default function Centrinova({ centrinova }) {
             <textarea value={data.description} onChange={e => setData('description', e.target.value)} className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
             <InputError message={errors.description} className="mt-2" />
             </div>
+
+            {/* IMAGE */}
+            {/* <div>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+        {previewImage && (
+            <img src={previewImage} alt="Preview" style={{ width: 400, height: 200 }} />
+        )}
+            </div> */}
            
             <div className="space-x-2">
                 <PrimaryButton className="mt-4">Save</PrimaryButton>

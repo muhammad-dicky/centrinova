@@ -105,10 +105,13 @@ class CentrinovaController extends Controller
             'message' => 'required|string|max:255',
             'description' => 'required|string|max:255',
         ]);
+
  
         $centrinova->update($validated);
  
         return redirect(route('centrinova.index'));
+
+
     }
 
     /**
