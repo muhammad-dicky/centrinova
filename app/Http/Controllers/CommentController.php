@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Centrinova;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,10 +17,11 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(Request $request)
     {
+       
         return Inertia::render('Comment/Index', [
-            //
+            'comment' => Comment::with('user:id,name')->latest()->get(),
         ]);
     }
 

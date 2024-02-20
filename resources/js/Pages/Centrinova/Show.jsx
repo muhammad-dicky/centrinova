@@ -4,6 +4,7 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm, Head } from '@inertiajs/react';
 import Centrinova from '@/Components/Centrinova';
+import Comment from '@/Components/Comment';
 
 const Show = ({ centrinova, auth, comment }) => {
 
@@ -28,6 +29,9 @@ const Show = ({ centrinova, auth, comment }) => {
     // post(route('comment.store'), { onSuccess: () => reset() });
     
   };
+
+  const filteredComments = comment.filter(comment => comment.centrinova_id === centrinova.id);
+
   
 
   return (
@@ -88,6 +92,22 @@ const Show = ({ centrinova, auth, comment }) => {
           </div>
         </div>
       )}
+
+
+
+
+<div className="mt-6 bg-white shadow-sm rounded-lg divide-y">
+    {filteredComments.length > 0 ? (
+        filteredComments.map(comment =>
+            <Comment key={comment.id} comment={comment} />
+        )
+    ) : (
+        <p className="text-gray-500 text-center">Komentar kosong, jadilah yang pertama berkomentar!</p>
+    )}
+</div>
+
+
+
     </AuthenticatedLayout>
   );
 }

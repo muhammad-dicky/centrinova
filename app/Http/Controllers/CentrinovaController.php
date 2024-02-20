@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Centrinova;
 use Illuminate\Http\Request;
 // use Illuminate\Http\Response;
@@ -56,8 +57,11 @@ class CentrinovaController extends Controller
     public function show($id)
     {
         $centrinova = Centrinova::findOrFail($id);
+        // $comment = Comment::where('centrinova_id', $id)->get();
+
         return Inertia::render('Centrinova/Show', [
             'centrinova' => $centrinova,
+            'comment' => Comment::with('user:id, name')->latest()->get(),
         ]);
     }
 

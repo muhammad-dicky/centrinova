@@ -3,8 +3,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm, Head } from '@inertiajs/react';
- 
-export default function Index({ auth }) {
+import Comment from '@/Components/Comment'; 
+
+export default function Index({ auth , comment}) {
     const { data, setData, post, processing, reset, errors } = useForm({
         message: '',
     });
@@ -30,6 +31,13 @@ export default function Index({ auth }) {
                     <PrimaryButton className="mt-4" disabled={processing}>Comment</PrimaryButton>
                 </form>
             </div>
+
+
+            <div className="mt-6 bg-white shadow-sm rounded-lg divide-y">
+                    {comment.map(comment =>
+                        <Comment key={comment.id} comment={comment} />
+                    )}
+                </div>
         </AuthenticatedLayout>
     );
 }
