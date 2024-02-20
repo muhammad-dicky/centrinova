@@ -6,11 +6,12 @@ import { useForm, Head } from '@inertiajs/react';
 import Centrinova from '@/Components/Centrinova';
 import Comment from '@/Components/Comment';
 
-const Show = ({ centrinova, auth, comment }) => {
+const Show = ({ centrinova, auth, comment, imagePath }) => {
 
   const { data, setData, post, processing, reset, errors } = useForm({
     message: '',
-    centrinova_id: ''
+    centrinova_id: '',
+    image: null,
   });
   // const [centrinova_id] = useState(centrinova.id);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
@@ -32,7 +33,7 @@ const Show = ({ centrinova, auth, comment }) => {
 
   const filteredComments = comment.filter(comment => comment.centrinova_id === centrinova.id);
 
-  
+  console.log(centrinova.image);
 
   return (
     <AuthenticatedLayout
@@ -46,6 +47,22 @@ const Show = ({ centrinova, auth, comment }) => {
           <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6">
               <h1 className="text-2xl font-semibold text-gray-800">{centrinova.message}</h1>
+
+
+
+              {/* IMAGE */}
+              <div className="mt-6 bg-white shadow-sm rounded-lg">
+            {/* ... comment section */}
+            
+
+            {centrinova.image && ( 
+                <div className="image-container"> 
+                    <img src={imagePath} alt={centrinova.message} />
+                </div>
+            )}
+        </div>
+        {/* BAWAH */}
+
               <p className="mt-2 text-gray-600 break-all">{centrinova.description}</p>
             </div>
           </div>

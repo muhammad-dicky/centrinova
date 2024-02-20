@@ -14,7 +14,8 @@ class Centrinova extends Model
 
     protected $fillable = [
         'message',
-        'description'
+        'description',
+        'image',
     ];
 
 

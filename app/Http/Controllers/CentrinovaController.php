@@ -11,6 +11,9 @@ use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 
 
@@ -43,9 +46,24 @@ class CentrinovaController extends Controller
         $validated = $request->validate([
             'message' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'image' => [
+                'required',
+                'file',
+                'image',
+                'mimes:jpeg,png,jpg,gif',
+                'max:2048', // 2MB limit
+            ],
+            '_token' => csrf_token(),
         ]);
 
- 
+        $filename = Str::random(10) . '.' . $request->image->getClientOriginalExtension();
+
+
+        $path = $request->image->storeAs('centrinova', $filename, 'public');
+    
+        $validated['image'] = $path; 
+
+
         $request->user()->centrinova()->create($validated);
  
         return redirect(route('centrinova.index'));
@@ -57,11 +75,13 @@ class CentrinovaController extends Controller
     public function show($id)
     {
         $centrinova = Centrinova::findOrFail($id);
+        $imagePath = asset('storage/' . $centrinova->image);
         // $comment = Comment::where('centrinova_id', $id)->get();
 
         return Inertia::render('Centrinova/Show', [
             'centrinova' => $centrinova,
             'comment' => Comment::with('user:id, name')->latest()->get(),
+            'imagePath' => $imagePath,
         ]);
     }
 
