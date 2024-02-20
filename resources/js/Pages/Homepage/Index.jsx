@@ -5,6 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm, Head,Link } from '@inertiajs/react';
 import Centrinova from '@/Components/Centrinova';
 import Guest from '@/Layouts/GuestLayout';
+import Centrinovahome from '@/Components/CentrinovaHome';
 
 
 
@@ -58,7 +59,7 @@ export default function Index({ auth, centrinova }) {
 
                 <div className="my-32 mx-auto sm:w-fit md:w-2/3 lg:w-1/2 xl:w-2/3 bg-white shadow-sm rounded-lg divide-y">
     {centrinova.map(centrinova =>
-        <Centrinova key={centrinova.id} centrinova={centrinova} />
+        <Centrinovahome key={centrinova.id} centrinova={centrinova} />
     )}
 </div>
 

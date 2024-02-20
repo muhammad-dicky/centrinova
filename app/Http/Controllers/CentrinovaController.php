@@ -43,6 +43,7 @@ class CentrinovaController extends Controller
             'message' => 'required|string|max:255',
             'description' => 'required|string|max:255',
         ]);
+
  
         $request->user()->centrinova()->create($validated);
  

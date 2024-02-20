@@ -42,7 +42,8 @@ Route::resource('centrinova', CentrinovaController::class)
     Route::get('/centrinova/{id}', [CentrinovaController::class, 'show'])->name('centrinova.show');
 
     Route::resource('comment', CommentController::class)
-    ->only(['index', 'store','update', 'destroy']);
+    ->only(['index', 'store','update', 'destroy'])
+    ->middleware(['auth', 'verified']);
 
 // Route::post('/centrinova/{centrinovaId}/comments', [CommentController::class, 'store'])->name('comments.store');
 
