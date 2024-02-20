@@ -6,23 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Centrinova extends Model
+class Homepage extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'message',
-        'description',
     ];
-
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function comment()
-    {
-        return $this->hasMany(Comment::class);
     }
 }

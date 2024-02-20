@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
+
 
 
 class CentrinovaController extends Controller
@@ -38,6 +41,7 @@ class CentrinovaController extends Controller
     {
         $validated = $request->validate([
             'message' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
         ]);
  
         $request->user()->centrinova()->create($validated);
@@ -48,9 +52,12 @@ class CentrinovaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Centrinova $centrinova)
+    public function show($id)
     {
-        //
+        $centrinova = Centrinova::findOrFail($id);
+        return Inertia::render('Centrinova/Show', [
+            'centrinova' => $centrinova,
+        ]);
     }
 
     /**

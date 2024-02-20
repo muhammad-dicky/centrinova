@@ -19,6 +19,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Centrinova::class);
     }
+    
+    public function homepage(): HasMany
+    {
+        return $this->hasMany(Homepage::class);
+    }
+
+    public function comment(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 
     /**
      * The attributes that are mass assignable.

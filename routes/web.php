@@ -1,5 +1,7 @@
 <?php
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CentrinovaController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +18,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -25,6 +27,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::resource('/', HomepageController::class)
+    ->only(['index', 'store', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,6 +38,13 @@ Route::get('/dashboard', function () {
 Route::resource('centrinova', CentrinovaController::class)
     ->only(['index', 'store', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+    Route::get('/centrinova/{id}', [CentrinovaController::class, 'show'])->name('centrinova.show');
+
+    Route::resource('comment', CommentController::class)
+    ->only(['index', 'store','update', 'destroy']);
+
+// Route::post('/centrinova/{centrinovaId}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -1,15 +1,18 @@
-import { Link, Head,useForm } from '@inertiajs/react';
-import React from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import React,{ useState, useEffect } from 'react';
+import HomepageLayout from '@/Layouts/HomepageLayout';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { useForm, Head,Link } from '@inertiajs/react';
 import Centrinova from '@/Components/Centrinova';
+import Guest from '@/Layouts/GuestLayout';
 
 
-export default function Welcome({ auth, laravelVersion, phpVersion , centrinova}) {
 
+
+export default function Index({ auth, centrinova }) {
     const { data, setData, post, processing, reset, errors } = useForm({
         message: '',
+        description: '',
     });
  
     const submit = (e) => {
@@ -17,11 +20,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion , centrinova}
         post(route('centrinova.store'), { onSuccess: () => reset() });
     };
 
-
+    console.log(centrinova)
+ 
     return (
         <>
-            <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+        <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
                     {auth.user ? (
                         <Link
@@ -49,7 +52,16 @@ export default function Welcome({ auth, laravelVersion, phpVersion , centrinova}
                     )}
                 </div>
 
-               
+                <Head message="Homepage" />
+ 
+ 
+
+                <div className="my-32 mx-auto sm:w-fit md:w-2/3 lg:w-1/2 xl:w-2/3 bg-white shadow-sm rounded-lg divide-y">
+    {centrinova.map(centrinova =>
+        <Centrinova key={centrinova.id} centrinova={centrinova} />
+    )}
+</div>
+
                 
                 
 
@@ -57,20 +69,6 @@ export default function Welcome({ auth, laravelVersion, phpVersion , centrinova}
                 
             </div>
 
-            {/* <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
-        >
-            <Head title="Dashboard" />
-
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">You're logged in!</div>
-                    </div>
-                </div>
-            </div>
-        </AuthenticatedLayout> */}
 
 
             

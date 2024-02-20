@@ -13,23 +13,29 @@ class CentrinovaPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
+    }
+
+    public function view(User $user, Centrinova $centrinova): bool
+    {
+        // Mengembalikan nilai true untuk memperbolehkan akses pengguna
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Centrinova $centrinova): bool
-    {
-        //
-    }
+    // public function view(User $user, Centrinova $centrinova): bool
+    // {
+        
+    // }
 
     /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        //
+        
     }
 
     /**
