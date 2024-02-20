@@ -46,24 +46,24 @@ const Show = ({ centrinova, auth, comment, imagePath }) => {
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6">
-              <h1 className="text-2xl font-semibold text-gray-800">{centrinova.message}</h1>
+              <h1 className="text-center text-7xl font-semibold text-gray-800">{centrinova.message}</h1>
 
 
 
               {/* IMAGE */}
-              <div className="mt-6 bg-white shadow-sm rounded-lg">
-            {/* ... comment section */}
-            
-
-            {centrinova.image && ( 
-                <div className="image-container"> 
-                    <img src={imagePath} alt={centrinova.message} />
-                </div>
-            )}
+              <div className="mt-6 bg-white shadow-sm rounded-lg flex justify-center items-center">
+    {/* ... comment section */}
+    
+    {centrinova.image && ( 
+        <div className="image-container"> 
+            <img src={imagePath} alt={centrinova.message} />
         </div>
+    )}
+</div>
+
         {/* BAWAH */}
 
-              <p className="mt-2 text-gray-600 break-all">{centrinova.description}</p>
+              <p className="mt-2 text-2xl text-gray-600 break-all">{centrinova.description}</p>
             </div>
           </div>
         </div>
