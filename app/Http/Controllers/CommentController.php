@@ -107,8 +107,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy(Comment $comment): RedirectResponse
     {
-        //
+        $this->authorize('delete', $comment);
+
+        $comment->delete();
+
+        return back();
     }
 }

@@ -27,6 +27,7 @@ class CentrinovaController extends Controller
         // return response("Hello, world!");
         return Inertia::render('Centrinova/Index', [
             'centrinova' => Centrinova::with('user:id,name')->latest()->get(),
+            'comment' => Comment::with('user:id, name')->latest()->get(),
         ]);
     }
 

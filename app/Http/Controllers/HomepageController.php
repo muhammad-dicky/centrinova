@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Homepage;
+use App\Models\Comment;
 use App\Models\Centrinova;
 use Illuminate\Http\Request;
 // use Illuminate\Http\Response;
@@ -26,7 +27,7 @@ class HomepageController extends Controller
         
         return Inertia::render('Homepage/Index', [
             'centrinova' => Centrinova::with('user:id,name')->latest()->get(),
-            // 'centrinova' => $centrinova
+            'comment' => Comment::with('user:id, name')->latest()->get(),
         ]);
     }
 

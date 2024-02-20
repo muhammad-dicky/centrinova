@@ -81,14 +81,7 @@ const Show = ({ centrinova, auth, comment, imagePath }) => {
             onChange={e => setData('message', e.target.value)}
           ></textarea>
           <InputError message={errors.message} className="mt-2" />
-          {/* <textarea
-            value={data.centrinova_id}
-            placeholder="What's on your mind?"
-            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            onChange={e => setData('centrinova_id', e.target.value)}
-          ></textarea>
-          <InputError message={errors.message} className="mt-2" /> */}
-          {/* <input  name="centrinova_id" value={centrinova_id} /> */}
+         
           <PrimaryButton className="mt-4" disabled={processing}>
             Comment
           </PrimaryButton>
