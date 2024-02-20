@@ -10,10 +10,12 @@ export default function Index({ auth, centrinova }) {
     const { data, setData, post, processing, reset, errors } = useForm({
         message: '',
         description: '',
-        image: null,
+        image: '',
     });
 
     const [previewImage, setPreviewImage] = useState(null);
+
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
  
     const submit = async (e) => {
         e.preventDefault();
@@ -32,7 +34,7 @@ export default function Index({ auth, centrinova }) {
 
 
         try {
-            await post(route('centrinova.store'), { onSuccess: () => reset() });
+            await post(route('centrinova.store'), { onSuccess: () => {reset(); setShowSuccessPopup(true);} });
             reset();
             setPreviewImage(null);
           } catch (error) {
@@ -132,6 +134,22 @@ export default function Index({ auth, centrinova }) {
                     )}
                 </div>
             </div>
+
+
+            {/* POPUP */}
+      {showSuccessPopup && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <p className="text-green-600 font-semibold">Post submitted successfully!</p>
+            <button
+              onClick={() => setShowSuccessPopup(false)}
+              className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
         </AuthenticatedLayout>
     );
 }

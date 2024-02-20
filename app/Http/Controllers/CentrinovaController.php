@@ -102,6 +102,7 @@ class CentrinovaController extends Controller
  
         $validated = $request->validate([
             'message' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
         ]);
  
         $centrinova->update($validated);
