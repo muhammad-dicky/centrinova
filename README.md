@@ -5,6 +5,8 @@ LOGIN
 Email: admin@gmail.com
 Password: admin123
 
+Register
+http://127.0.0.1:8000/welcome
 
 Tech Stack:
 Laravel
